@@ -1,5 +1,6 @@
 import nltk
 import contractions
+import re
 
 # this class will be used to extract content words from a given text
 # it will get part of the speech of each word and then filter out the words
@@ -11,6 +12,21 @@ class ContentWordsExtractor:
     def get_content_words(self, text):
         # expand constractions
         text = contractions.fix(text)
+        # to lower case
+        text = text.lower()
+        text += "$"
+        # replace "h" when it is after a number by hour using regex
+        text = re.sub(r"(\d)\s*h[^a-zA-Z0-9_]", r"\1 hour ", text)
+        # replace "F" when it is after a number by minute using regex
+        text = re.sub(r"(\d)\s*F[^a-zA-Z0-9_]", r"\1 fahrenheit ", text)
+        # replace "C" when it is after a number by minute using regex
+        text = re.sub(r"(\d)\s*C[^a-zA-Z0-9_]", r"\1 celcius ", text)
+        # replace "%" when it is after a number by minute using regex
+        text = re.sub(r"(\d)\s*\%[^a-zA-Z0-9_]", r"\1 percent ", text)
+        # to lower case
+        text = text.lower()
+        # remove special character from end of sentence
+        text = text[:-1]
         # get part of speech of each word
         tokens = nltk.word_tokenize(text)
         pos_tags = nltk.pos_tag(tokens)
