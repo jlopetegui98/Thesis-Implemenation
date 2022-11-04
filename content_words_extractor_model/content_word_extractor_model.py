@@ -23,6 +23,8 @@ class ContentWordsExtractor:
         text = re.sub(r"(\d)\s*C[^a-zA-Z0-9_]", r"\1 celcius ", text)
         # replace "%" when it is after a number by minute using regex
         text = re.sub(r"(\d)\s*\%[^a-zA-Z0-9_]", r"\1 percent ", text)
+        # replace special characters by space
+        text = re.sub(r"[^.,a-zA-Z0-9 ]", r" ", text)
         # to lower case
         text = text.lower()
         # remove special character from end of sentence
