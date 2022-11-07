@@ -56,10 +56,8 @@ class ContentModel(nn.Module):
         cross entropy loss of content classifier
         """
         # predictions
-        print(content_embedding.shape)
         output = self.content_classifier(self.dropout(content_embedding))
         preds = nn.Softmax(dim=0)(output)
-        print("IM HERE")
         # check smoothing
         smoothed_content_bow = (
             content_bow * (1 - self.mconfig.label_smoothing)

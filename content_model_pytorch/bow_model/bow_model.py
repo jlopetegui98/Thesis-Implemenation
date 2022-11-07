@@ -18,7 +18,7 @@ class Vocab:
     def _read_vocab(self):
         # if sentences are provided, create vocab from sentences
         vocab = collections.Counter()
-        if self.sentences:
+        if len(self.word2indx) == 0:
             for sentence in self.sentences:
                 for word in sentence.split():
                     vocab[word] += 1
