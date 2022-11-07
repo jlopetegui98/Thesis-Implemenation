@@ -1,4 +1,4 @@
-from bow_model.bow_model import Vocab
+from .bow_model.bow_model import Vocab
 from torch.utils.data import Dataset
 
 # class for dataset of sentences used to train content model
